@@ -13,6 +13,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Today's date</title>
+        <link href="css/style.css" rel="stylesheet" type="text/css">
     </head>
     <%
         Date date = new Date();
@@ -36,8 +37,13 @@
         <h1>Today's date</h1>
         <p>Today is <%= date %></p>
         <br>
+        
+        <!--
         <button>Pobierz plik główny</button>
+        -->
+        
         <form name="uploadForm" action="index.jsp" method="POST" enctype="multipart/form-data">
+        
             <%
                 String saveFile = new String();
                 String contentType = request.getContentType();
@@ -95,7 +101,33 @@
                     
                 }
                 %>
-            <input type="file" name="file" value="" width="100" />
+
+
+            <div class="browse-wrap">
+                <div class="title">Pobierz plik główny</div>
+                <input type="file" name="upload" class="upload" title="Wybierz plik do odczytania">
+            </div>
+            <span class="upload-path"></span> 
+                        
+  
+            <script>
+                // Span
+                var span = document.getElementsByClassName('upload-path');
+                // Button
+                var uploader = document.getElementsByName('upload');
+                // On change
+                for( item in uploader ) {
+                  // Detect changes
+                  uploader[item].onchange = function() {
+                    // Echo filename in span
+                    span[0].innerHTML = this.files[0].name;
+                  }
+                }    
+            </script>
+                
+            <!-- 
+            <input type="file" name="file" value="" width="100" />            
+            -->
             <input type="submit" value="Submit" name="submit" />
         </form>
         <br>
